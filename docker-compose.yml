@@ -1,0 +1,42 @@
+version: '2'
+services:
+  webserver:
+    image: nginx:alpine
+    volumes:
+      - ./:/var/www:rw,cached
+      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/:ro
+    ports:
+      - "8080:80"
+    depends_on:
+      - app
+      - db
+  app:
+    ## read php image from our custom docker image ##
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env.test
+    environment:
+      DB_DATABASE: fleet
+      DB_USERNAME: root
+      DB_PASSWORD: pass
+      DB_HOST: db
+    volumes:
+      ## copy project files to /var/www ##
+      - ./:/var/www:rw,cached
+    working_dir: /var/www
+    restart: always
+    depends_on:
+      - db
+
+  db:
+    container_name: db
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker-volumes-data/db:/var/lib/database
+    environment:
+      MYSQL_DATABASE: fleet
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_USER: root
