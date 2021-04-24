@@ -1,5 +1,5 @@
 <h1><p align="center" ><b>
-Fleet Management System, Test task for "Robusta studio"
+Fleet Management System
 </b>
 </p></h1>
 
@@ -11,12 +11,12 @@ Create Database laravel <br>
 
 Update .env file database configuration<br>
 ```bash
-DB_CONNECTION=mysql<br>
-DB_HOST=127.0.0.1<br>
-DB_PORT=3306<br>
-DB_DATABASE=laravel<br>
-DB_USERNAME=root<br>
-DB_PASSWORD=<br>
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=
 ```
 
 ## 3rd: Run the database migrations
